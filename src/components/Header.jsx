@@ -27,38 +27,33 @@ function Header() {
           </div>
           <div className="md:flex md:items-center md:gap-12">
             <nav aria-label="Site Nav" className="hidden md:block">
-              {/* <ul className="flex items-center gap-6 text-sm">
+              <ul className="flex items-center gap-6 text-sm">
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
-                    About
-                  </a>
+                  <Link className="text-gray-500 transition hover:text-gray-500/75" to="/products">
+                    Products
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
-                    Careers
-                  </a>
+                  <Link className="text-gray-500 transition hover:text-gray-500/75" to="/orders">
+                    Orders
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
-                    History
-                  </a>
+                  <Link className="text-gray-500 transition hover:text-gray-500/75" to="/inventory">
+                    Inventory
+                  </Link>
                 </li>
                 <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
-                    Projects
-                  </a>
-                </li>
-                <li>
-                  <a className="text-gray-500 transition hover:text-gray-500/75" href="/">
+                  <Link className="text-gray-500 transition hover:text-gray-500/75" to="/blog">
                     Blog
-                  </a>
+                  </Link>
                 </li>
-              </ul> */}
+                <li>
+                  <Link className="text-gray-500 transition hover:text-gray-500/75" to="/about">
+                    About
+                  </Link>
+                </li>
+              </ul>
             </nav>
             <div className="flex items-center gap-4">
               <div className="sm:flex sm:gap-4">

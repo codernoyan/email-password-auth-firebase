@@ -13,6 +13,7 @@ const auth = getAuth(app);
 // eslint-disable-next-line react/prop-types
 function UserContext({ children }) {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
   const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
@@ -20,11 +21,12 @@ function UserContext({ children }) {
   useEffect(() => {
     const unsubscribeUser = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
     return () => unsubscribeUser();
   }, []);
   const autInfo = {
-    user, createUser, signIn, logOut,
+    user, loading, createUser, signIn, logOut,
   };
   return (
     <AuthContext.Provider value={autInfo}>{children}</AuthContext.Provider>

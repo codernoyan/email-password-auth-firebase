@@ -3,12 +3,15 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable linebreak-style */
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/UserContext';
 
 function Login() {
   const { signIn } = useContext(AuthContext);
   const [authError, setAuthError] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.form?.state?.pathname || '/';
 
   const [showPassword, setShowPassword] = useState('password');
   const handleShowHidePassword = () => {
@@ -31,6 +34,7 @@ function Login() {
         console.log(user);
         form.reset();
         setAuthError('');
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error);
