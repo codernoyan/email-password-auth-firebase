@@ -25,7 +25,38 @@ function SignUp() {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+    const confirm = form.confirm.value;
     // console.log(email, password);
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setAuthError('Please input valid email address');
+      return;
+    }
+
+    if (!/(?=.*[a-z])/.test(password)) {
+      setAuthError('Password should be at least one lowercase');
+      return;
+    }
+
+    if (!/(?=.*[A-Z])/.test(password)) {
+      setAuthError('Password Should be at least one uppercase');
+      return;
+    }
+
+    if (!/(?=.*[!#$%&? "])/.test(password)) {
+      setAuthError('Password should be at least one special character');
+      return;
+    }
+
+    if (!/(?=.{8,})/.test(password)) {
+      setAuthError('Password Should be at least 8 characters');
+      return;
+    }
+    // validation
+    if (password !== confirm) {
+      setAuthError('Password doesn\'t match');
+      return;
+    }
+
     createUser(email, password)
       .then((result) => {
         const { user } = result;
@@ -51,7 +82,7 @@ function SignUp() {
         <div>
           <label htmlFor="email" className="sr-only">Email</label>
           <div className="relative">
-            <input type="email" name="email" className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm" placeholder="Enter email" />
+            <input type="email" name="email" className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm" placeholder="Enter email" required />
             <span className="absolute inset-y-0 right-4 inline-flex items-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
@@ -62,7 +93,19 @@ function SignUp() {
         <div>
           <label htmlFor="password" className="sr-only">Password</label>
           <div className="relative">
-            <input type={showPassword} name="password" className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm" placeholder="Enter password" />
+            <input type={showPassword} name="password" className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm" placeholder="Enter password" required />
+            <button onClick={handleShowHidePassword} className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div>
+          <label htmlFor="confirm" className="sr-only">Confirm Password</label>
+          <div className="relative">
+            <input type={showPassword} name="confirm" className="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm" placeholder="Enter password" required />
             <button onClick={handleShowHidePassword} className="absolute inset-y-0 right-4 inline-flex items-center cursor-pointer">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
