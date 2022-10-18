@@ -15,9 +15,20 @@ function UserContext({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-  const signIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
-  const logOut = () => signOut(auth);
+  // firebase authentication
+  const createUser = (email, password) => {
+    setLoading(true);
+    createUserWithEmailAndPassword(auth, email, password);
+  };
+  const signIn = (email, password) => {
+    setLoading(true);
+    signInWithEmailAndPassword(auth, email, password);
+  };
+  const logOut = () => {
+    setLoading(true);
+    signOut(auth);
+  };
+
   useEffect(() => {
     const unsubscribeUser = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);

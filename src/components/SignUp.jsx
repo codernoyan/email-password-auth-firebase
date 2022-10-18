@@ -57,6 +57,8 @@ function SignUp() {
       return;
     }
 
+    setAuthError('');
+
     createUser(email, password)
       .then((result) => {
         const { user } = result;
